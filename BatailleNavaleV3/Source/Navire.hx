@@ -7,12 +7,12 @@ class Navire {
     var x : Int;
     var y : Int;
     var mer : Mer;
-    var bmp : Bitmap;
+    public var bmp : Bitmap;
 
     public function new(x : Int, y : Int, laMer : Mer) {
-        if (x>=0 && x<15) this.x=x;
+        if (x>=0 && x<Main.size) this.x=x;
         else this.x=0;
-        if (y>=0 && y<15) this.y=y;
+        if (y>=0 && y<Main.size) this.y=y;
         else this.y=0;
         bmp = new Bitmap(Assets.getBitmapData("assets/navire.png"));
     }

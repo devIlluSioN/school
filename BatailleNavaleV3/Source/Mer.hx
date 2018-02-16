@@ -8,6 +8,7 @@ class Mer {
     var spr : Sprite;
     var dimensions : Int;
     var navire : Array<Navire>;
+    
 
     public function new(dimensions : Int) {
         this.dimensions = dimensions;
@@ -29,22 +30,22 @@ class Mer {
     }
 
     public function estSurLaMer(x : Int, y : Int) : Bool {
-        if((x>=0 && x<15) && (y>=0 && y<15)) return true;
+        if((x>=0 && x< Main.size) && (y>=0 && y< Main.size)) return true;
         else return false;
         
     }
 
     public function ajouterNavire(n : Navire) {
-        this.navire.push(n);
+        this.navire.push(n); //AJote au tableau
 		var bmp =n.getBmp();
-        this.spr.addChild(n.getBmp());
+        this.spr.addChild(n.getBmp()); //AJote un sprite
         bmp.x=n.getX()*Main.TAILLE;
         bmp.y=n.getY()*Main.TAILLE;
 
     }
 
     public function supprimerNavire(n : Navire) {
-        this.navire.remove(n);
+        this.navire.remove(n); //retire du tableau
 		this.spr.removeChild(n.getBmp());
     }
 
@@ -53,9 +54,37 @@ class Mer {
         for (n in navire)
         {
             if (n.getX() == x && n.getY() == y)
-                return(True);
-            return (False);
+                return(true);
         }
+        return (false);
+    }
+
+    public function DetruireNavire(x : Int, y : Int) : Void
+    {
+        for (n in navire)
+        {
+            if (n.getX() == x && n.getY() == y)
+            {
+                //spr.removeChild(n.bmp);
+                n.getBmp().visible = true;
+                n.bmp.bitmapData = Assets.getBitmapData("assets/explosion.png");
+                break;
+                //spr.addChild(n.bmp);
+            }
+
+        }
+    }
+    public function Tirechoue(x : Int, y : Int)
+    {
+                trace(x,y);
+                var point_Rouge : Bitmap = new Bitmap(Assets.getBitmapData("assets/rond_rouge.png"));
+                point_Rouge.x = x * Main.TAILLE;
+                point_Rouge.y = y * Main.TAILLE;
+                this.spr.addChild(point_Rouge);
+
+    }
+    public function getNavires() : Array<Navire>{
+        return navire.copy();
     }
 
     public function chercherNavire(x : Int, y : Int) : Navire {
