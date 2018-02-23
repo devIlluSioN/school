@@ -2,6 +2,8 @@ import openfl.display.Sprite;
 import openfl.Assets;
 import openfl.display.Bitmap;
 import openfl.display.BitmapData;
+import openfl.display.DisplayObjectContainer;
+
 
 class Mer {
 
@@ -36,9 +38,9 @@ class Mer {
     }
 
     public function ajouterNavire(n : Navire) {
-        this.navire.push(n); //AJote au tableau
+        this.navire.push(n); //Ajoute au tableau
 		var bmp =n.getBmp();
-        this.spr.addChild(n.getBmp()); //AJote un sprite
+        this.spr.addChild(n.getBmp()); //Ajoute un sprite
         bmp.x=n.getX()*Main.TAILLE;
         bmp.y=n.getY()*Main.TAILLE;
 
@@ -76,7 +78,6 @@ class Mer {
     }
     public function Tirechoue(x : Int, y : Int)
     {
-                trace(x,y);
                 var point_Rouge : Bitmap = new Bitmap(Assets.getBitmapData("assets/rond_rouge.png"));
                 point_Rouge.x = x * Main.TAILLE;
                 point_Rouge.y = y * Main.TAILLE;
@@ -96,8 +97,13 @@ class Mer {
 			}
     } 
     return nc;  
-}
-
+    }
+/*
+    public function dejatire(x : Int, y : Int) : Bool{
+        trace(this.getObjectsUnderPoint(new Point(x*32,y*32))); 
+        return(true);
+    }
+*/
     public function cacherNavire() {
         for (n in navire) {
 			n.getBmp().visible = false;

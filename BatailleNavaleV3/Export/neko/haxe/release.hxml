@@ -1,9 +1,9 @@
 -main ApplicationMain 
 --macro openfl._internal.utils.ExtraParams.include()
--cp /usr/local/lib/haxe/lib/openfl/7,0,0/src
+-cp C:/Users/PATRICIA/haxelib install openfl/openfl/7,0,0/src
 -D openfl=7.0.0
 --macro lime.Lib.extraParams()
--cp /usr/local/lib/haxe/lib/lime/6,0,1
+-cp C:/Users/PATRICIA/haxelib install openfl/lime/6,0,1
 -D lime=6.0.1
 -cp Source
 -D lime-openal
@@ -14,11 +14,10 @@
 -D native
 -D lime-native
 -D lime-vorbis
--D MACOSX_DEPLOYMENT_TARGET=10.7
 -D lime-curl
 -D openfl-native
 -D lime-cffi
--D mac
+-D windows
 -D desktop
 --remap flash:openfl
 -cp Export/neko/haxe

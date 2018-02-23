@@ -5,6 +5,7 @@ import openfl.display.BitmapData;
 import openfl.display.Sprite;
 import openfl.events.MouseEvent;
 import openfl.Lib;
+import openfl.display.DisplayObjectContainer;
 
 
 class Main extends Sprite {
@@ -15,6 +16,8 @@ class Main extends Sprite {
 	var nbNav : Int;
 	public static inline var size = 5; //nombre de collone et de ligne
 	var listofpos = new List<Int>();
+	var listofshoot = new List<Int>();
+
 	
 	public function new () {
 		
@@ -30,7 +33,7 @@ class Main extends Sprite {
 		merIA.getSpr().x = (1625 - size * TAILLE) / 2;
 		merIA.getSpr().y = (600 - size * TAILLE) / 2;
 		this.listofpos = dolist();
-		for (i in 0...6) // 0 to 9
+		for (i in 0...NBNAV) // 0 to 9
 			IAnavire();
 		mer.getSpr().addEventListener(MouseEvent.CLICK, onMerClick); 
 		merIA.getSpr().addEventListener(MouseEvent.CLICK, onMerIAClick);//définit la	
@@ -98,12 +101,28 @@ class Main extends Sprite {
 			}*/
 	}
 
+	public function isonlist(Liste : List<Int>, Interger : Int) : Bool
+	{
+		for(item in Liste)
+		{
+			if (item == Interger)
+			{
+				return true;
+			}
+		}
+		return false;
+	} 
+
 	public function onMerIAClick(e : MouseEvent) {
 		//for (n in merIA.getNavires()){
 		//	trace(n);
 		//}
 		var x : Int = Math.floor(e.localX / TAILLE);
 		var y : Int = Math.floor(e.localY / TAILLE);
+
+		if(isonlist(listofshoot, Std.int(size*x+y)))
+			return(0);
+		listofshoot.add(Std.int(size*x+y));
 		if(merIA.EstLibre(x,y))
 		{
 			merIA.DetruireNavire(x,y);
@@ -113,6 +132,7 @@ class Main extends Sprite {
 			merIA.Tirechoue(x,y);
 		}
 		IAPlay();
+		return(1);
 	}
 
 
